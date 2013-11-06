@@ -1,13 +1,13 @@
 class Triplet
 
   def self.where(params={})
-    {max_factor: 10}.merge(params)
+    min_factor = params.fetch(:min_factor, 1)
     max_factor = params.fetch(:max_factor)
     
     triplets = []
-    (1..max_factor).each do |factor1|
-      (1..max_factor).each do |factor2|
-        (1..max_factor).each do |factor3|
+    (min_factor..max_factor).each do |factor1|
+      (min_factor..max_factor).each do |factor2|
+        (min_factor..max_factor).each do |factor3|
           triplets << [factor1, factor2, factor3].sort
         end
       end
