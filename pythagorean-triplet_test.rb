@@ -11,12 +11,10 @@ class TripletTest < MiniTest::Unit::TestCase
   end
 
   def test_pythagorean
-    skip
     assert Triplet.new(3, 4, 5).pythagorean?
   end
 
   def test_not_pythagorean
-    skip
     assert !Triplet.new(5, 6, 7).pythagorean?
   end
 
