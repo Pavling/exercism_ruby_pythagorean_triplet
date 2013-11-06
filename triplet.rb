@@ -12,19 +12,19 @@ class Triplet
   end
 
   def initialize(a, b, c)
-    @sides = [a, b, c].sort
+    @a, @b, @c = a, b, c
   end
 
   def product
-    @sides.reduce(:*)
+    @a * @b * @c
   end
 
   def sum
-    @sides.reduce(:+)
+    @a + @b + @c
   end
 
   def pythagorean?
-    @sides[0,2].map { |side| side**2 }.reduce(:+) == @sides[-1]**2
+    @a**2 + @b**2 == @c**2
   end
 
 end
