@@ -4,6 +4,9 @@ class Triplet
     @sides = [a, b, c]
   end
 
+  def product
+    @sides.reduce(:*)
+  end
 
   def sum
     @sides.reduce(:+)
