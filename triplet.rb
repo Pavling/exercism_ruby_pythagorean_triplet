@@ -5,16 +5,8 @@ class Triplet
     max_factor = params.fetch(:max_factor)
     factor_sum = params.fetch(:sum, nil)
     
-    triplets = []
-    (min_factor..max_factor).each do |factor1|
-      (min_factor..max_factor).each do |factor2|
-        (min_factor..max_factor).each do |factor3|
-          triplets << [factor1, factor2, factor3].sort
-        end
-      end
-    end
+    triplets = (min_factor..max_factor).to_a.combination(3).to_a
 
-    triplets.uniq!
     triplets.select! { |triplet| Triplet.new(*triplet).sum == factor_sum } if factor_sum
     triplets.select! { |triplet| Triplet.new(*triplet).pythagorean? }
     triplets.map { |triplet| Triplet.new(*triplet) }
