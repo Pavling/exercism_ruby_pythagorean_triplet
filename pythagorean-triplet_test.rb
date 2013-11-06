@@ -31,7 +31,6 @@ class TripletTest < MiniTest::Unit::TestCase
   end
 
   def test_triplets_where_sum_x
-    skip
     triplets = Triplet.where(sum: 180, max_factor: 100)
     products = triplets.map(&:product).sort
     assert_equal [118080, 168480, 202500], products

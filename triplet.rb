@@ -3,6 +3,7 @@ class Triplet
   def self.where(params={})
     min_factor = params.fetch(:min_factor, 1)
     max_factor = params.fetch(:max_factor)
+    factor_sum = params.fetch(:sum, nil)
     
     triplets = []
     (min_factor..max_factor).each do |factor1|
@@ -12,8 +13,11 @@ class Triplet
         end
       end
     end
-    triplets = triplets.uniq.select {|triplet| Triplet.new(*triplet).pythagorean?}
-    triplets.map {|triplet| Triplet.new(*triplet)}
+
+    triplets.uniq!
+    triplets.select! { |triplet| Triplet.new(*triplet).sum == factor_sum } if factor_sum
+    triplets.select! { |triplet| Triplet.new(*triplet).pythagorean? }
+    triplets.map { |triplet| Triplet.new(*triplet) }
   end
 
   def initialize(a, b, c)
