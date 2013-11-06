@@ -5,11 +5,10 @@ class Triplet
     max_factor = params.fetch(:max_factor)
     factor_sum = params.fetch(:sum, nil)
     
-    triplets = (min_factor..max_factor).to_a.combination(3).to_a
+    triplets = (min_factor..max_factor).to_a.combination(3).map { |triplet| Triplet.new(*triplet) }
 
-    triplets.select! { |triplet| Triplet.new(*triplet).sum == factor_sum } if factor_sum
-    triplets.select! { |triplet| Triplet.new(*triplet).pythagorean? }
-    triplets.map { |triplet| Triplet.new(*triplet) }
+    triplets.select! { |triplet| triplet.sum == factor_sum } if factor_sum
+    triplets.select! { |triplet| triplet.pythagorean? }
   end
 
   def initialize(a, b, c)
